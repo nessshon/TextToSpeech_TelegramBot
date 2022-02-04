@@ -6,10 +6,10 @@ from aiogram.utils.exceptions import MessageToDeleteNotFound
 from aiogram.utils.markdown import hcode, hbold
 from gtts import gTTS
 
-from EchoVoice_TelegramBot.bot.throttling import rate_limit
+from bot.throttling import rate_limit
 
 
-@rate_limit(5)
+@rate_limit(3)
 async def tts_handler(message: types.Message):
     sticker = 'CAACAgIAAxkBAAIsnmGMc6Xnxqz-T5IZJGrMO6_HY04QAAJBAQACzRswCPHwYhjf9pZYIgQ'
     action = types.ChatActions.RECORD_AUDIO
@@ -19,11 +19,6 @@ async def tts_handler(message: types.Message):
 
         try:
             await message.answer_chat_action(action=action)
-
-            caption = (
-                f'{hbold("Озвученный текст:")}'
-                f'\n\n{hcode(message.text)}'
-            )
             msg = await message.answer_sticker(sticker=sticker)
 
             voice_path = f'{message.from_user.id}.ogg'
@@ -31,7 +26,6 @@ async def tts_handler(message: types.Message):
 
             await message.answer_voice(
                 voice=types.InputFile(voice_path),
-                caption=caption
             )
             await msg.delete()
             os.remove(voice_path)

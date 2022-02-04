@@ -4,10 +4,10 @@ import logging
 from aiogram.dispatcher.filters import CommandStart
 from aiogram.utils.exceptions import Unauthorized
 
-from EchoVoice_TelegramBot.bot.commands import start_command
-from EchoVoice_TelegramBot.bot.handlers import tts_handler
-from EchoVoice_TelegramBot.bot.loader import dp
-from EchoVoice_TelegramBot.bot.throttling import ThrottlingMiddleware
+from bot.commands import start_command
+from bot.handlers import tts_handler
+from bot.loader import dp
+from bot.throttling import ThrottlingMiddleware
 
 
 async def main():
